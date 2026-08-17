@@ -61,7 +61,7 @@
     "railway": {
       "type": "local",
       "command": ["railway", "mcp"],
-      "enabled": true
+      "enabled": false
     },
     "github": {
       "type": "local",

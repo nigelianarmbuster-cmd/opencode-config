@@ -377,6 +377,16 @@ Exiting budget mode: when the Manager adds the missing keys (or says "switch to 
 
 ---
 
+## MCP Servers (dormant by default)
+
+ALL MCP servers in the config are dormant by design — declared in `opencode.json` with `"enabled": false` (playwright, chrome-devtools, elevenlabs, yt-dlp, vercel, gemini-api-docs, context7, github, macos-use, railway). Each enabled server adds startup cost and context tokens to every conversation, and some require heavy installs, Docker, or extra accounts/keys. Nothing is "broken" if these tools are missing — their tools simply are not exposed.
+
+- If the Manager asks for browser control, desktop control, deployments, GitHub work, etc., do NOT assume the tool exists. Check `opencode mcp list` (or note the tools actually available). If the MCP is dormant, tell the Manager plainly: "It is available but off by default — enable it in `opencode.json` (`mcp.<name>.enabled: true`) and restart OpenCode" and point them at the setup guides (agent-orchestration repo, "Learn how to customize your OpenCode config" section).
+- Visual verification fallback chain unchanged: @observer first (Gemini key only), playwright only if enabled.
+- Railway is also dormant now; only `observer-bridge` behavior and the Ollama provider are active-by-default extras.
+
+---
+
 ## After Work Complete
 
 Before marking any batch of work complete:
