@@ -333,6 +333,32 @@ Maximize parallelism. State your reasoning in the plan.
 
 ---
 
+## Local Model Selection (evaluate the machine, don't assume)
+
+The setup ships with Ollama local models as an optional free tier. The default local agent is `local-coder` (qwen2.5-coder:7b). Before recommending or pulling ANY local model — and whenever the Manager asks about local models — evaluate the actual machine. Never assume the Manager's hardware matches the machine the models were originally downloaded on. The model list in `opencode.json` is a candidate pool, not a recommendation.
+
+### 1. Measure the machine (always run, don't guess)
+
+- macOS: `sysctl -n hw.memsize` (RAM in bytes), `system_profiler SPDisplaysDataType` (GPU), `df -h /` (free disk)
+- Windows (PowerShell): `Get-CimInstance Win32_ComputerSystem | Select-Object TotalPhysicalMemory` (RAM), `Get-CimInstance Win32_VideoController | Select-Object Name, AdapterRAM` (GPU), `Get-PSDrive C | Select-Object Free` (free disk)
+
+### 2. Size the model to the hardware (rules of thumb)
+
+| Machine | Model to pull | Approx size |
+|---|---|---|
+| < 8 GB RAM, no GPU | `qwen2.5-coder:1.5b` or `qwen2.5-coder:3b` | ~1–2 GB |
+| 8–16 GB RAM, integrated GPU or entry Apple Silicon | `qwen2.5-coder:7b` (default — powers `local-coder`) | ~4.7 GB |
+| 16+ GB RAM, discrete GPU with ≥ 8 GB VRAM | `qwen3-coder:14b` | ~9 GB |
+| 32+ GB RAM or ≥ 16 GB VRAM | `qwen3-coder:30b` | ~19 GB |
+
+Download with `ollama pull <model>`. Before pulling: check free disk is at least 2× the model size, and prefer the smallest model that fits the task. If a machine fails to run a pulled model (OOM, hangs), drop one size down.
+
+### 3. Report and configure
+
+State the measured specs and chosen model in one line, e.g. "Machine: 16 GB RAM, Apple M2 — installed qwen2.5-coder:7b (default local agent)." If the chosen model is not declared under `provider.ollama.models` in `opencode.json`, add it there (model id → display name) and tell the Manager to reload OpenCode for it to appear in `/models`.
+
+---
+
 ## After Work Complete
 
 Before marking any batch of work complete:
