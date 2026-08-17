@@ -363,6 +363,20 @@ State the measured specs and chosen model in one line, e.g. "Machine: 16 GB RAM,
 
 ---
 
+## Budget Mode (DeepSeek-only operation)
+
+The Manager may run the setup funding only DeepSeek. Trigger: the Manager says "use the budget instructions", "budget mode", or similar. While budget mode is active:
+
+- Spawn junior-tier agents and mules only (all DeepSeek). Do NOT spawn mid-tier (anthropic/claude-sonnet-5) or senior-tier (anthropic/claude-opus-4-8) agents, and do not call the Anthropic provider.
+- If a task genuinely needs a mid/senior review, say so plainly — e.g. "This would need the Anthropic tier — add a key via `/connect` to unlock it" — and proceed with the best junior-tier option.
+- Gemini agents (`gemini-worker`, `gemini-mule`, `observer`): use only if a Gemini key is actually configured (check `opencode auth list` and the project `.env`). The observer may work on Gemini's free tier — attempt it for pasted images; if it fails with an auth error, report "Screenshot saved, but visual analysis is unavailable in budget mode."
+- Ollama local agents remain available if installed.
+- The full setup stays fully configured — nothing is removed, disabled, or rewritten.
+
+Exiting budget mode: when the Manager adds the missing keys (or says "switch to full production", "exit budget mode"), resume the normal tier policy immediately — no reconfiguration needed. Re-check available providers with `opencode auth list` when in doubt.
+
+---
+
 ## After Work Complete
 
 Before marking any batch of work complete:
