@@ -353,7 +353,11 @@ The setup ships with Ollama local models as an optional free tier. The default l
 
 Download with `ollama pull <model>`. Before pulling: check free disk is at least 2× the model size, and prefer the smallest model that fits the task. If a machine fails to run a pulled model (OOM, hangs), drop one size down.
 
-### 3. Report and configure
+### 3. Limit the count — one model by default
+
+Download ONE model by default — the smallest that fits the task comfortably. Do NOT download everything the machine could run: each model is 1–20 GB, multiple models confuse first-time users, and local models are an optional extra, not the main setup. Pull a second, larger model only if the user explicitly asks for more capability (e.g. "install a bigger local model too"), and never go above two models without asking the user first. If the user asks for a specific model, that counts as the explicit ask.
+
+### 4. Report and configure
 
 State the measured specs and chosen model in one line, e.g. "Machine: 16 GB RAM, Apple M2 — installed qwen2.5-coder:7b (default local agent)." If the chosen model is not declared under `provider.ollama.models` in `opencode.json`, add it there (model id → display name) and tell the Manager to reload OpenCode for it to appear in `/models`.
 
