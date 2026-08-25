@@ -39,7 +39,7 @@ v1 is business-only. The design anticipates an optional scope argument in a futu
 - `## Quick Wins` — `- [ ] item | route: now(2min) / delegate(<who>) / later`
 - `## Waiting For` — `- [ ] item | from <who> | since YYYY-MM-DD`
 - `## Someday / Low Priority` — `- [ ] item | from <who> | since`
-- `## Recurring` — `- [ ] item | next due YYYY-MM-DD`
+- `## Recurring` — `- [ ] item | repeats: <freq> | next due YYYY-MM-DD` (repeats optional)
 - `## Today` — MIT + moved yesterday (overwritten each morning)
 - `## Wins & Growth` — dated wins + streak (consecutive business days with MIT completed)
 - `## Log` — append-only; record intake totals here when present.
@@ -83,7 +83,7 @@ Finished? → blocked? → capture/defer stragglers → confirm candidate wins �
 
 ## /weekly Flow
 
-Full sweep: re-sort rocks · chase waiting-for · clear quick wins · flag recurring due-soon · stale decisions (deadline / MIT / park) · sweep Someday/Low Priority (upgrade / park / delegate / drop) · enforce the 7-rock cap (demote weakest per the tiebreak rules) · monthly rollover (move Log + Wins entries older than 30 days to ARCHIVE-YYYY-MM.md during the first ritual of a new month — or the next /weekly if that month's rollover was missed) → growth reflection ("What got easier this week?") + celebration → escalation check → write back + refresh TODAY.md.
+Full sweep: re-sort rocks · chase waiting-for · clear quick wins · flag recurring due-soon · stale decisions (deadline / MIT / park) · sweep Someday/Low Priority (upgrade / park / delegate / drop) · enforce the 7-rock cap (demote weakest per the tiebreak rules) · monthly rollover (move Log + Wins entries older than 30 days to ARCHIVE-YYYY-MM.md during the first ritual of a new month — or the next /weekly if that month's rollover was missed) → growth reflection ("What got easier this week?") + celebration → escalation check → write back + refresh TODAY.md. When a recurring item's `next due` has passed or is completed, suggest rolling `next due` forward using its `repeats` cadence — ask the user for the cadence if `repeats` is missing.
 
 ## Escalation
 
