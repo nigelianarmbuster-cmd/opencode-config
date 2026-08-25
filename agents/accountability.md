@@ -35,14 +35,16 @@ v1 is business-only. The design anticipates an optional scope argument in a futu
 
 ## Ledger Schema (BIG_ROCKS.md sections)
 
-- `## Big Rocks` — lines: `- [ ] name | due YYYY-MM-DD or none | Xbd | status | next physical action | last-changed`; status ∈ next / in progress / waiting / deferred; MAX 7 rocks.
-- `## Quick Wins` — `- [ ] item | route: now(2min) / delegate(<who>) / later`
-- `## Waiting For` — `- [ ] item | from <who> | since YYYY-MM-DD`
-- `## Someday / Low Priority` — `- [ ] item | from <who> | since`
-- `## Recurring` — `- [ ] item | repeats: <freq> | next due YYYY-MM-DD` (repeats optional)
+- `## Big Rocks` — lines: `- [ ] name | due YYYY-MM-DD or none | Xbd | status | next physical action | last-changed [| src: <url>]`; status ∈ next / in progress / waiting / deferred; MAX 7 rocks.
+- `## Quick Wins` — `- [ ] item | route: now(2min) / delegate(<who>) / later [| src: <url>]`
+- `## Waiting For` — `- [ ] item | from <who> | since YYYY-MM-DD [| src: <url>]`
+- `## Someday / Low Priority` — `- [ ] item | from <who> | since [| src: <url>]`
+- `## Recurring` — `- [ ] item | repeats: <freq> | next due YYYY-MM-DD [| src: <url>]` (repeats optional)
 - `## Today` — MIT + moved yesterday (overwritten each morning)
 - `## Wins & Growth` — dated wins + streak (consecutive business days with MIT completed)
 - `## Log` — append-only; record intake totals here when present.
+
+Any line in any section may end with the optional `| src: <url>` tail (the URL is the last field). `src` is a clickable link back to the exact source email. Hand-typed items carry no src — that's fine.
 
 Append-only rule: Log and Wins & Growth are append-only during daily rituals; the ONLY permitted removal is the monthly rollover into ARCHIVE-YYYY-MM.md.
 
@@ -63,8 +65,9 @@ Committed + undated = Big Rock with `due: none`. Flag `stale` when last-changed 
 1. Run `python gmail_ingest.py` via bash in the Accountability folder; read `intake_dump.md`. If the script errors with a blocked-access message or isn't available, instead check `INBOX.md` (manual capture: pipe-delimited lines `description | type | due | source`, types: big_rock, quick_win, waiting_for, someday, win, recurring). At most ONE intake reminder per ritual: if INBOX.md is also empty, remind once: "Run the Gmail side-panel intake and paste into INBOX.md — or say skip." If INBOX.md has content, proceed without any reminder.
 2. Classify each thread/line into ledger entries WITH the user. Ask on ambiguous type. Dated big_rocks get a due date + next physical action. `due: none` triggers the commitment question: "Real commitment (keep, undated) or park it?" `win` lines become candidate wins pending user confirmation. `recurring` items file to `## Recurring` with a `next due` date — ask the user for the recurrence cadence if unclear.
 3. Merge check: compare incoming items against each other AND against existing ledger entries; if they look like one task, ask "These look like one task — merge?" Never merge silently. Process backlog-scale intake in chunks with the user.
-4. Parser tolerance: strip leading `*`/`-`/whitespace; convert `\_` to `_`; trim around pipes.
-5. After intake: remind the user to archive the captured emails in Gmail. Record intake totals in the Log.
+4. Filing rule: when filing items from `intake_dump.md`, copy each thread's `Link:` into the ledger line as `| src: <url>`. Preserve `src` during edits, reconciliation, and normalization; never drop it. Hand-typed items carry no src — that's fine.
+5. Parser tolerance: strip leading `*`/`-`/whitespace; convert `\_` to `_`; trim around pipes.
+6. After intake: remind the user to archive the captured emails in Gmail. Record intake totals in the Log.
 
 ## Reconciliation
 
