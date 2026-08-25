@@ -35,9 +35,9 @@ v1 is business-only. The design anticipates an optional scope argument in a futu
 
 ## Ledger Schema (BIG_ROCKS.md sections)
 
-- `## Big Rocks` — lines: `- [ ] name | due YYYY-MM-DD or none | Xbd | status | next physical action | last-changed [| src: <url>]`; status ∈ next / in progress / waiting / deferred; MAX 7 rocks.
+- `## Big Rocks` — lines: `- [ ] name | due YYYY-MM-DD or none | Xbd | status | next physical action | last-changed [| src: <url>]`; status ∈ next / in progress / waiting / deferred; MAX 7 rocks. A rock may have indented 2-space sub-task lines directly beneath it (`  - [ ] step` / `  - [x] step`); `progress` = done/total of those sub-tasks. The `action` field means the IMMEDIATE next step and must stay in sync with the first un-done sub-task — when sub-tasks exist, /focus enforces that sync instead of inventing actions.
 - `## Quick Wins` — `- [ ] item | route: now(2min) / delegate(<who>) / later [| src: <url>]`
-- `## Waiting For` — `- [ ] item | from <who> | since YYYY-MM-DD [| src: <url>]`
+- `## Waiting For` — `- [ ] item | from <who> | since YYYY-MM-DD [| src: <url>]` — follow-up tasks: you are waiting on information or deliverables owed to you by other people.
 - `## Someday / Low Priority` — `- [ ] item | from <who> | since [| src: <url>]`
 - `## Recurring` — `- [ ] item | repeats: <freq> | next due YYYY-MM-DD [| src: <url>]` (repeats optional)
 - `## Today` — MIT + moved yesterday (overwritten each morning)
@@ -55,6 +55,7 @@ days-left = business days (Mon–Fri) until 6pm ET on the due date; due today = 
 - Weekend due dates: if a due date falls on Saturday or Sunday, treat it as 6pm ET on the following Monday.
 - OVERDUE boundary: a rock becomes OVERDUE once past 6pm ET on its due date. On the due date itself it is 0bd red, not yet overdue.
 - Date format: ALL dates in the ledger are `YYYY-MM-DD` — due dates, Waiting For `since`, Someday `since`, Big Rocks `last-changed`, Recurring `next due`.
+- Waiting For stale rule: any Waiting For item aged ≥3 business days is surfaced at /focus with "chase this?"; ALL Waiting For items get chased at /weekly.
 
 ## No-Deadline Rules
 
@@ -74,11 +75,12 @@ Committed + undated = Big Rock with `due: none`. Flag `stale` when last-changed 
 - Every ritual begins by scanning the ledger for user-made edits since the last ritual: checked checkboxes (`[x]` on Quick Wins or any section), changed fields (due dates, statuses, routes), and newly added lines.
 - `[x]` items: during /focus, note them and confirm ("I see you checked off X — log as win?"); during /checkin, confirm and move to Wins & Growth, then remove from the section and note the removal in Log.
 - Changed fields and new lines: normalize into the section's format and confirm the interpretation with the user ("New line 'X' in Quick Wins — route?" if ambiguous). Never silently overwrite user edits.
+- Sub-task toggles (`  - [x]` under a rock) are user edits: scan them for progress only. They are NOT wins — only completing the whole rock is a win.
 - The user may edit the ledger directly (a local dashboard or any text editor). Their edits are authoritative input — treat them exactly like intake, not as corruption.
 
 ## /focus Flow (morning)
 
-Intake (above) → compute days-left AND overdue in one pass, sort, color (dated first, undated compact subsection) → escalation check consuming that same computation (no second independent derivation) → show Big Rocks alone, tersely (the full picture goes in TODAY.md) → ask "What moved yesterday?" (verbatim) → force ONE Most Important Thing → trap check (if the MIT is a quick win: "That's a quick win. Which Big Rock does it serve?") → enforce a next physical action on every rock → write Today + Log, regenerate TODAY.md, monthly rollover if a new month (or the next /weekly if that month's rollover was missed) → emit a supervisor kickoff line for the MIT ("switch to supervisor and say: decompose X").
+Intake (above) → compute days-left AND overdue in one pass, sort, color (dated first, undated compact subsection) → escalation check consuming that same computation (no second independent derivation) → show Big Rocks alone, tersely (the full picture goes in TODAY.md) → ask "What moved yesterday?" (verbatim) → force ONE Most Important Thing → trap check (if the MIT is a quick win: "That's a quick win. Which Big Rock does it serve?") → enforce a next physical action on every rock (when a rock has sub-tasks, sync `action` with the first un-done sub-task instead of inventing one) → write Today + Log, regenerate TODAY.md, monthly rollover if a new month (or the next /weekly if that month's rollover was missed) → emit a supervisor kickoff line for the MIT ("switch to supervisor and say: decompose X").
 
 ## /checkin Flow (evening)
 
@@ -86,7 +88,7 @@ Finished? → blocked? → capture/defer stragglers → confirm candidate wins �
 
 ## /weekly Flow
 
-Full sweep: re-sort rocks · chase waiting-for · clear quick wins · flag recurring due-soon · stale decisions (deadline / MIT / park) · sweep Someday/Low Priority (upgrade / park / delegate / drop) · enforce the 7-rock cap (demote weakest per the tiebreak rules) · monthly rollover (move Log + Wins entries older than 30 days to ARCHIVE-YYYY-MM.md during the first ritual of a new month — or the next /weekly if that month's rollover was missed) → growth reflection ("What got easier this week?") + celebration → escalation check → write back + refresh TODAY.md. When a recurring item's `next due` has passed or is completed, suggest rolling `next due` forward using its `repeats` cadence — ask the user for the cadence if `repeats` is missing.
+Full sweep: re-sort rocks · chase ALL waiting-for items · clear quick wins · flag recurring due-soon · stale decisions (deadline / MIT / park) · sweep Someday/Low Priority (upgrade / park / delegate / drop) · enforce the 7-rock cap (demote weakest per the tiebreak rules) · monthly rollover (move Log + Wins entries older than 30 days to ARCHIVE-YYYY-MM.md during the first ritual of a new month — or the next /weekly if that month's rollover was missed) → growth reflection ("What got easier this week?") + celebration → escalation check → write back + refresh TODAY.md. When a recurring item's `next due` has passed or is completed, suggest rolling `next due` forward using its `repeats` cadence — ask the user for the cadence if `repeats` is missing.
 
 ## Escalation
 
