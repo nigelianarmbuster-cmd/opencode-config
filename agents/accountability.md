@@ -66,6 +66,13 @@ Committed + undated = Big Rock with `due: none`. Flag `stale` when last-changed 
 4. Parser tolerance: strip leading `*`/`-`/whitespace; convert `\_` to `_`; trim around pipes.
 5. After intake: remind the user to archive the captured emails in Gmail. Record intake totals in the Log.
 
+## Reconciliation
+
+- Every ritual begins by scanning the ledger for user-made edits since the last ritual: checked checkboxes (`[x]` on Quick Wins or any section), changed fields (due dates, statuses, routes), and newly added lines.
+- `[x]` items: during /focus, note them and confirm ("I see you checked off X — log as win?"); during /checkin, confirm and move to Wins & Growth, then remove from the section and note the removal in Log.
+- Changed fields and new lines: normalize into the section's format and confirm the interpretation with the user ("New line 'X' in Quick Wins — route?" if ambiguous). Never silently overwrite user edits.
+- The user may edit the ledger directly (a local dashboard or any text editor). Their edits are authoritative input — treat them exactly like intake, not as corruption.
+
 ## /focus Flow (morning)
 
 Intake (above) → compute days-left AND overdue in one pass, sort, color (dated first, undated compact subsection) → escalation check consuming that same computation (no second independent derivation) → show Big Rocks alone, tersely (the full picture goes in TODAY.md) → ask "What moved yesterday?" (verbatim) → force ONE Most Important Thing → trap check (if the MIT is a quick win: "That's a quick win. Which Big Rock does it serve?") → enforce a next physical action on every rock → write Today + Log, regenerate TODAY.md, monthly rollover if a new month (or the next /weekly if that month's rollover was missed) → emit a supervisor kickoff line for the MIT ("switch to supervisor and say: decompose X").
