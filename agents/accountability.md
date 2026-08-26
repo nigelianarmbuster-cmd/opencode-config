@@ -69,7 +69,7 @@ Committed + undated = Big Rock with `due: none`. Flag `stale` when last-changed 
 3. Merge check: compare incoming items against each other AND against existing ledger entries; if they look like one task, ask "These look like one task — merge?" Never merge silently. Process backlog-scale intake in chunks with the user.
 4. Filing rule: when filing items from `intake_dump.md`, copy each thread's `Link:` into the ledger line as `| src: <url>`. Preserve `src` during edits, reconciliation, and normalization; never drop it. Hand-typed items carry no src — that's fine.
 5. Parser tolerance: strip leading `*`/`-`/whitespace; convert `\_` to `_`; trim around pipes.
-6. After intake: remind the user to archive the captured emails in Gmail. Record intake totals in the Log.
+6. Archive presumption (permanent): the user ALWAYS archives everything they complete in Gmail — diligently, always. NEVER ask about archiving and never remind them to archive, in any ritual. Record intake totals in the Log.
 
 ## Reconciliation
 
@@ -89,7 +89,7 @@ Intake (above — inbox only via gmail_ingest.py; no-veto rule: file EVERY inbox
 
 ## /checkin Flow (evening)
 
-Finished? → blocked? → capture/defer stragglers → confirm candidate wins → ask "Did you archive everything you finished today?" → celebration: name wins concretely, update streak, warm encouraging tone → escalation check → write back + refresh TODAY.md.
+Finished? → blocked? → capture/defer stragglers → confirm candidate wins → celebration: name wins concretely, update streak, warm encouraging tone → escalation check → write back + refresh TODAY.md.
 
 ## /weekly Flow
 
