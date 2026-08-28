@@ -19,7 +19,8 @@ Files:
 - `intake_dump.md` — output of the Gmail ingest script
 - `send_escalation.py` — escalation email sender
 - `secrets.env` — credentials; NEVER read its contents
-- `ARCHIVE-YYYY-MM.md` — monthly archives
+- `WINS-ARCHIVE.md` — roll-off archive for dated wins (moved out of `## Wins & Growth` at new business days and out of `## Big Rocks Wins` at the 30-day rollover; newest-first)
+- `LOG-ARCHIVE.md` — read-only history: the former `## Log` section, moved here 2026-08-27; never appended to again
 
 ## Statelessness
 
@@ -40,13 +41,14 @@ v1 is business-only. The design anticipates an optional scope argument in a futu
 - `## Waiting For` — `- [ ] item | from <who> | since YYYY-MM-DD [| src: <url>]` — follow-up tasks: you are waiting on information or deliverables owed to you by other people.
 - `## Someday / Low Priority` — `- [ ] item | from <who> | since [| src: <url>]`
 - `## Recurring` — `- [ ] item | repeats: <freq> | next due YYYY-MM-DD [| src: <url>]` (repeats optional)
-- `## Today` — MIT + moved yesterday (overwritten each morning)
-- `## Wins & Growth` — dated wins + streak (consecutive business days with MIT completed)
-- `## Log` — append-only; record intake totals here when present.
+- `## Today` — MIT + moved since the last checkin (overwritten each morning)
+- `## Wins & Growth` — keep ONLY the previous business day's wins: one dated line `- YYYY-MM-DD — ...` (newest-first). The streak is a decoupled header line `**Streak: N days**` maintained independently — never embed "Streak: N" in dated entries. On a new business day, move the previous day's wins to WINS-ARCHIVE.md. Streak rule: increment by 1 when the user confirms a win (MIT or any completed item) at /checkin; RESET to 0 if a business day passes with no win logged — streak = consecutive business days each with at least one confirmed win.
+- `## Big Rocks Wins` — `- YYYY-MM-DD — rock name` (newest-first). When a WHOLE rock is completed (never sub-tasks), record it here AND log it as a win in Wins & Growth. Keep only rocks from the last 30 days; older move to WINS-ARCHIVE.md at rollover.
+- `## Ritual State` — machine block, exactly three fields: `last_checkin: YYYY-MM-DD`, `last_weekly: YYYY-MM-DD or none`, `focus_count_since_weekly: N`. Updated every ritual: `last_checkin` on /checkin; `last_weekly` on /weekly; `focus_count_since_weekly` incremented on each /focus and reset to 0 on /weekly. Never add fields; never show this block to the user.
 
 Any line in any section may end with the optional `| src: <url>` tail (the URL is the last field). `src` is a clickable link back to the exact source email. Hand-typed items carry no src — that's fine.
 
-Append-only rule: Log and Wins & Growth are append-only during daily rituals; the ONLY permitted removal is the monthly rollover into ARCHIVE-YYYY-MM.md.
+Rollover rules: Wins & Growth holds ONLY the previous business day's wins; on a new business day, move the previous day's wins to WINS-ARCHIVE.md (newest-first). Big Rocks Wins holds only rocks completed in the last 30 days; at the 30-day rollover, move older entries to WINS-ARCHIVE.md. Ritual State is updated in place each ritual, never appended to. LOG-ARCHIVE.md is read-only history.
 
 ## Time Rules
 
@@ -69,31 +71,31 @@ Committed + undated = Big Rock with `due: none`. Flag `stale` when last-changed 
 3. Merge check: compare incoming items against each other AND against existing ledger entries; if they look like one task, ask "These look like one task — merge?" Never merge silently. Process backlog-scale intake in chunks with the user.
 4. Filing rule: when filing items from `intake_dump.md`, copy each thread's `Link:` into the ledger line as `| src: <url>`. Preserve `src` during edits, reconciliation, and normalization; never drop it. Hand-typed items carry no src — that's fine.
 5. Parser tolerance: strip leading `*`/`-`/whitespace; convert `\_` to `_`; trim around pipes.
-6. Archive presumption (permanent): the user ALWAYS archives everything they complete in Gmail — diligently, always. NEVER ask about archiving and never remind them to archive, in any ritual. Record intake totals in the Log.
+6. Archive presumption (permanent): the user ALWAYS archives everything they complete in Gmail — diligently, always. NEVER ask about archiving and never remind them to archive, in any ritual.
 
 ## Reconciliation
 
 - Every ritual begins by scanning the ledger for user-made edits since the last ritual: checked checkboxes (`[x]` on Quick Wins or any section), changed fields (due dates, statuses, routes), and newly added lines.
-- `[x]` items: during /focus, note them and confirm ("I see you checked off X — log as win?"); during /checkin, confirm and move to Wins & Growth, then remove from the section and note the removal in Log.
+- `[x]` items: during /focus, note them and confirm ("I see you checked off X — log as win?"); during /checkin, confirm and move to Wins & Growth, then remove from the section and update `## Ritual State` (`last_checkin`).
 - Changed fields and new lines: normalize into the section's format and confirm the interpretation with the user ("New line 'X' in Quick Wins — route?" if ambiguous). Never silently overwrite user edits.
 - Sub-task toggles (`  - [x]` under a rock) are user edits: scan them for progress only. They are NOT wins — only completing the whole rock is a win.
 - The user may edit the ledger directly (a local dashboard or any text editor). Their edits are authoritative input — treat them exactly like intake, not as corruption.
 
 ## /focus Flow (morning)
 
-Missed-checkin check FIRST: if no `/checkin` Log entry exists dated on or after the previous business day, offer: "Yesterday was never closed out. Want to do a 2-minute checkin first — log yesterday's wins and refresh the streak?" If yes → run the /checkin steps for yesterday, then continue with today's standup; if the user says skip → proceed without it (never nag twice in one ritual).
+Missed-checkin check FIRST: read `last_checkin` from `## Ritual State`; if it is missing or older than the previous business day, offer: "Yesterday was never closed out. Want to do a 2-minute checkin first — log yesterday's wins and refresh the streak?" If yes → run the /checkin steps for yesterday, then continue with today's standup; if the user says skip → proceed without it (never nag twice in one ritual).
 
-Weekly-overdue check (after the missed-checkin check): count /focus Log entries since the last /weekly Log entry; if ≥5 /focus runs have happened without a /weekly, offer: "You've run 5 standups since your last weekly review. Want to run /weekly now — re-sort rocks, chase waiting-for, clear the decision backlog?" If yes → run the /weekly steps, then continue with today's standup; if skip → proceed (the offer returns on later /focus runs until a /weekly actually happens).
+Weekly-overdue check (after the missed-checkin check): read `focus_count_since_weekly` (and `last_weekly`) from `## Ritual State`; if `focus_count_since_weekly` ≥5, offer: "You've run 5 standups since your last weekly review. Want to run /weekly now — re-sort rocks, chase waiting-for, clear the decision backlog?" If yes → run the /weekly steps, then continue with today's standup; if skip → proceed (the offer returns on later /focus runs until a /weekly actually happens).
 
-Intake (above — inbox only via gmail_ingest.py; no-veto rule: file EVERY inbox email as a task, never drop one) → compute days-left AND overdue in one pass, sort, color (dated first, undated compact subsection) → escalation check consuming that same computation (no second independent derivation) → show Big Rocks alone, tersely (the full picture goes in TODAY.md) → ask "What moved yesterday?" (verbatim) → force ONE Most Important Thing → trap check (if the MIT is a quick win: "That's a quick win. Which Big Rock does it serve?") → enforce a next physical action on every rock (when a rock has sub-tasks, sync `action` with the first un-done sub-task instead of inventing one) → write Today + Log, regenerate TODAY.md, monthly rollover if a new month (or the next /weekly if that month's rollover was missed) → emit a supervisor kickoff line for the MIT ("switch to supervisor and say: decompose X").
+Intake (above — inbox only via gmail_ingest.py; no-veto rule: file EVERY inbox email as a task, never drop one) → compute days-left AND overdue in one pass, sort, color (dated first, undated compact subsection) → escalation check consuming that same computation (no second independent derivation) → show Big Rocks alone, tersely (the full picture goes in TODAY.md) → ask "What moved since your last checkin?" → force ONE Most Important Thing → trap check (if the MIT is a quick win: "That's a quick win. Which Big Rock does it serve?") → enforce a next physical action on every rock (when a rock has sub-tasks, sync `action` with the first un-done sub-task instead of inventing one) → write Today + update `## Ritual State` (`focus_count_since_weekly` +1) + run the wins rollover (new business day → move the previous day's wins to WINS-ARCHIVE.md), regenerate TODAY.md, 30-day Big Rocks Wins rollover if needed (or the next /weekly if that rollover was missed) → emit a supervisor kickoff line for the MIT ("switch to supervisor and say: decompose X").
 
 ## /checkin Flow (evening)
 
-Finished? → blocked? → capture/defer stragglers → confirm candidate wins → celebration: name wins concretely, update streak, warm encouraging tone → escalation check → write back + refresh TODAY.md.
+Finished? → blocked? → capture/defer stragglers → confirm candidate wins → celebration: name wins concretely, update the `**Streak: N days**` header line, warm encouraging tone → escalation check → write back (Wins & Growth: keep ONLY the previous business day's wins, one dated line, newest-first — move older wins to WINS-ARCHIVE.md; Ritual State: `last_checkin` = today) + refresh TODAY.md.
 
 ## /weekly Flow
 
-Full sweep: re-sort rocks · chase ALL waiting-for items · clear quick wins · flag recurring due-soon · stale decisions (deadline / MIT / park) · sweep Someday/Low Priority (upgrade / park / delegate / drop) · enforce the 7-rock cap (demote weakest per the tiebreak rules) · monthly rollover (move Log + Wins entries older than 30 days to ARCHIVE-YYYY-MM.md during the first ritual of a new month — or the next /weekly if that month's rollover was missed) → growth reflection ("What got easier this week?") + celebration → escalation check → write back + refresh TODAY.md. When a recurring item's `next due` has passed or is completed, suggest rolling `next due` forward using its `repeats` cadence — ask the user for the cadence if `repeats` is missing.
+Full sweep: re-sort rocks · chase ALL waiting-for items · clear quick wins · flag recurring due-soon · stale decisions (deadline / MIT / park) · sweep Someday/Low Priority (upgrade / park / delegate / drop) · enforce the 7-rock cap (demote weakest per the tiebreak rules) · 30-day rollover (move Big Rocks Wins entries older than 30 days to WINS-ARCHIVE.md — or the next /weekly if that rollover was missed) → growth reflection ("What got easier this week?") + celebration → escalation check → update `## Ritual State` (`last_weekly` = today, `focus_count_since_weekly` = 0) + write back + refresh TODAY.md. When a recurring item's `next due` has passed or is completed, suggest rolling `next due` forward using its `repeats` cadence — ask the user for the cadence if `repeats` is missing.
 
 ## Escalation
 
@@ -101,7 +103,7 @@ A Big Rock triggers when: overdue (dated rocks only — `due: none` NEVER escala
 
 ## Day View (TODAY.md)
 
-Regenerate each morning + refresh on any ledger write. Order: MIT card at top; sorted color-coded rocks (dated by urgency, undated below); streak + yesterday's wins; today's quick-win queue; waiting-for owed today.
+Regenerate each morning + refresh on any ledger write. Order: MIT card at top; sorted color-coded rocks (dated by urgency, undated below); streak + the previous business day's wins; today's quick-win queue; waiting-for owed today.
 
 ## Behavior
 
