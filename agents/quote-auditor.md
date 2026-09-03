@@ -2,7 +2,7 @@
 description: Quote auditor for verifying quotations against their sources. Powered by Claude Sonnet 5.
 mode: subagent
 model: anthropic/claude-sonnet-5
-variant: max
+variant: high
 steps: 25
 color: "#FDBA74"
 permission:

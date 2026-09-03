@@ -1,8 +1,7 @@
 ﻿---
-description: "General-purpose leaf agent — handles bounded implementation, file edits, bash commands. Mule tier: structurally cannot spawn subagents. Powered by DeepSeek V4 Pro."
+description: "General-purpose leaf agent — handles bounded implementation, file edits, bash commands. Mule tier: structurally cannot spawn subagents. Powered by DeepSeek V4 Flash."
 mode: subagent
-model: deepseek/deepseek-v4-pro
-variant: max
+model: deepseek/deepseek-v4-flash
 steps: 30
 color: "#C7D2FE"
 permission:

@@ -1,8 +1,8 @@
 ﻿---
-description: General-purpose worker subagent — handles any task that doesn't fit a specialized role. Full edit/bash/web capability. Powered by DeepSeek V4 Pro.
+description: General-purpose worker subagent — handles any task that doesn't fit a specialized role. Full edit/bash/web capability. Powered by DeepSeek V4 Flash.
 mode: subagent
-model: deepseek/deepseek-v4-pro
-variant: max
+model: deepseek/deepseek-v4-flash
+variant: low
 steps: 40
 color: "#A5B4FC"
 permission:

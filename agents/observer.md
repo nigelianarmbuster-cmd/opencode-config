@@ -1,7 +1,7 @@
 ﻿---
 description: Multimodal visual analysis — read and analyze screenshots, design drafts, log images, UI states. Extract text, restore layouts, locate issues, compare screenshots, and extract error information. Returns structured analysis for the main agent.
 mode: subagent
-model: google/gemini-3.5-flash
+model: google/gemini-3.7-flash
 temperature: 0.1
 steps: 25
 permission:

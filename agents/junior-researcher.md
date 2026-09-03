@@ -1,8 +1,8 @@
 ﻿---
-description: Researcher subagent — multi-source investigation, synthesis, contradiction-mapping, gap identification, and actionable recommendations. Powered by DeepSeek V4 Pro.
+description: Researcher subagent — multi-source investigation, synthesis, contradiction-mapping, gap identification, and actionable recommendations. Powered by DeepSeek V4 Flash.
 mode: subagent
-model: deepseek/deepseek-v4-pro
-variant: max
+model: deepseek/deepseek-v4-flash
+variant: low
 steps: 40
 color: "#6EE7B7"
 permission:

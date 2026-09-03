@@ -1,8 +1,7 @@
 ﻿---
-description: "Planning leaf agent — bounded task breakdown, sequencing, milestone planning. Mule tier: structurally cannot spawn subagents. Powered by DeepSeek V4 Pro."
+description: "Planning leaf agent — bounded task breakdown, sequencing, milestone planning. Mule tier: structurally cannot spawn subagents. Powered by DeepSeek V4 Flash."
 mode: subagent
-model: deepseek/deepseek-v4-pro
-variant: max
+model: deepseek/deepseek-v4-flash
 steps: 30
 color: "#FCD34D"
 permission:

@@ -2,7 +2,7 @@
 description: Quote auditor subagent — line-by-line source verification, paraphrasing detection, attribution accuracy, flagging every uncertainty. Powered by Claude Opus 4.8.
 mode: subagent
 model: anthropic/claude-opus-4-8
-variant: max
+variant: high
 steps: 25
 color: "#F97316"
 permission:

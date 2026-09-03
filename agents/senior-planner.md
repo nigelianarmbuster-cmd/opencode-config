@@ -2,7 +2,7 @@
 description: Planner subagent for task breakdown, dependency mapping, sequencing, milestone planning, and risk assessment. Powered by Claude Opus 4.8.
 mode: subagent
 model: anthropic/claude-opus-4-8
-variant: max
+variant: high
 steps: 25
 color: "#8B5CF6"
 permission:

@@ -1,8 +1,8 @@
 ﻿---
-description: Researcher for topic exploration, source gathering, and structured answers. Powered by Claude Sonnet 5.
+description: Researcher for topic exploration, source gathering, and structured answers. Powered by Gemini 3.7 Flash.
 mode: subagent
-model: anthropic/claude-sonnet-5
-variant: max
+model: google/gemini-3.7-flash
+variant: high
 steps: 40
 color: "#6EE7B7"
 permission:

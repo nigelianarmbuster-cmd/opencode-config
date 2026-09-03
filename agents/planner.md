@@ -1,8 +1,8 @@
 ﻿---
-description: Planner subagent for task breakdown, dependency mapping, sequencing, milestone planning, and risk assessment. Powered by Claude Sonnet 5.
+description: Planner subagent for task breakdown, dependency mapping, sequencing, milestone planning, and risk assessment. Powered by Gemini 3.7 Flash.
 mode: subagent
-model: anthropic/claude-sonnet-5
-variant: max
+model: google/gemini-3.7-flash
+variant: high
 steps: 25
 color: "#A78BFA"
 permission:

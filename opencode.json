@@ -121,6 +121,23 @@
           "name": "Qwen3.5 27B (local)"
         }
       }
+    },
+    "deepseek": {
+      "models": {
+        "deepseek-v4-flash": {
+          "options": {
+            "reasoningEffort": "low",
+            "thinking": {
+              "type": "disabled"
+            }
+          }
+        }
+      }
+    },
+    "google": {
+      "options": {
+        "apiKey": "{env:GOOGLE_GENERATIVE_AI_API_KEY}"
+      }
     }
   },
   "disabled_providers": []
