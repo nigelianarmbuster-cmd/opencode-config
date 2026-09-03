@@ -1,3 +1,9 @@
 node_modules/
 bun.lock
 .DS_Store
+
+# Accountability coach (local-only, not shared)
+agents/accountability.md
+command/checkin.md
+command/focus.md
+command/weekly.md
