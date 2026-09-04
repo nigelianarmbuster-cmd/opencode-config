@@ -2,7 +2,7 @@
 description: Software architect for design decisions, refactoring plans, and system structure. Powered by Claude Sonnet 5.
 mode: subagent
 model: anthropic/claude-sonnet-5
-variant: high
+variant: medium
 steps: 25
 color: "#3B82F6"
 permission:

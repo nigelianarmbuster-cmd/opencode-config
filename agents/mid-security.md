@@ -2,7 +2,7 @@
 description: Security auditor for vulnerability scanning — secrets, injections, unsafe dependencies, and common attack vectors. Powered by Claude Sonnet 5.
 mode: subagent
 model: anthropic/claude-sonnet-5
-variant: high
+variant: medium
 steps: 30
 color: "#DC2626"
 permission:

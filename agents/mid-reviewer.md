@@ -2,7 +2,7 @@
 description: Code reviewer subagent — bug detection, logic flaws, edge cases, code quality, severity-tiered findings. Powered by Claude Sonnet 5.
 mode: subagent
 model: anthropic/claude-sonnet-5
-variant: high
+variant: medium
 steps: 30
 color: "#F87171"
 permission:

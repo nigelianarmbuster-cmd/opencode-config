@@ -2,7 +2,7 @@
 description: Content editor for clarity, flow, and readability. Powered by Claude Sonnet 5.
 mode: subagent
 model: anthropic/claude-sonnet-5
-variant: high
+variant: medium
 steps: 25
 color: "#FDE68A"
 permission:

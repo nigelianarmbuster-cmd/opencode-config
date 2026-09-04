@@ -2,7 +2,7 @@
 description: General-purpose worker subagent — handles any task that doesn't fit a specialized role. Full edit/bash/web capability. Powered by Claude Sonnet 5.
 mode: subagent
 model: anthropic/claude-sonnet-5
-variant: high
+variant: medium
 steps: 40
 color: "#818CF8"
 permission:
