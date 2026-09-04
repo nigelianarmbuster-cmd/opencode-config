@@ -4,7 +4,7 @@ mode: subagent
 model: google/gemini-3.7-flash
 options:
   thinkingConfig:
-    thinkingBudget: 0
+    thinkingLevel: minimal
 steps: 30
 color: "#34D399"
 permission:
