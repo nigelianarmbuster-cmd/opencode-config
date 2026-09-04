@@ -2,7 +2,10 @@
 description: General-purpose worker subagent — handles any task that doesn't fit a specialized role. Full edit/bash/web capability. Powered by DeepSeek V4 Flash.
 mode: subagent
 model: deepseek/deepseek-v4-flash
-variant: low
+options:
+  reasoningEffort: low
+  thinking:
+    type: disabled
 steps: 40
 color: "#A5B4FC"
 permission:

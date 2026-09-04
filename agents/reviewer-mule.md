@@ -2,6 +2,10 @@
 description: "Code review leaf agent — bounded diff review, logic/edge case analysis. Mule tier: structurally cannot spawn subagents. Powered by DeepSeek V4 Flash."
 mode: subagent
 model: deepseek/deepseek-v4-flash
+options:
+  reasoningEffort: low
+  thinking:
+    type: disabled
 steps: 30
 color: "#FCA5A5"
 permission:
