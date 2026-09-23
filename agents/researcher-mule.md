@@ -1,7 +1,7 @@
 ﻿---
 description: "Research leaf agent — bounded web research, documentation lookup, API investigation. Mule tier: structurally cannot spawn subagents. Powered by DeepSeek V4.1 Flash."
 mode: subagent
-model: deepseek/deepseek-v4.1-flash
+model: deepseek/deepseek-flash
 options:
   reasoningEffort: low
   thinking:

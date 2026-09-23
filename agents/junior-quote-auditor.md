@@ -1,7 +1,7 @@
 ﻿---
 description: Quote auditor subagent — line-by-line source verification, paraphrasing detection, attribution accuracy, flagging every uncertainty. Powered by DeepSeek V4.1 Flash.
 mode: subagent
-model: deepseek/deepseek-v4.1-flash
+model: deepseek/deepseek-flash
 options:
   reasoningEffort: low
   thinking:

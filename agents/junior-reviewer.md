@@ -1,7 +1,7 @@
 ﻿---
 description: Code reviewer subagent — bug detection, logic flaws, edge cases, code quality, severity-tiered findings. Powered by DeepSeek V4.1 Flash.
 mode: subagent
-model: deepseek/deepseek-v4.1-flash
+model: deepseek/deepseek-flash
 options:
   reasoningEffort: low
   thinking:
