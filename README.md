@@ -1,6 +1,6 @@
 # OpenCode Config
 
-The shared OpenCode agent setup: supervisor + ~43 tiered agents (DeepSeek V4 Pro juniors/mules, Claude Sonnet 5 mid, Claude Opus 4.8 senior, Gemini flash/pro, Ollama local), the `observer-bridge.js` screenshot plugin, and a dormant MCP server catalog.
+The shared OpenCode agent setup: supervisor + ~43 tiered agents (DeepSeek V4.1 Flash juniors/mules, Claude Sonnet 5 mid, Claude Opus 4.8 senior, Gemini flash/pro, Ollama local), the `observer-bridge.js` screenshot plugin, and a dormant MCP server catalog.
 
 **Who is this for:** anyone mirroring the setup — clone into `~/.config/opencode` (`%USERPROFILE%\.config\opencode` on Windows) and run `npm install`.
 

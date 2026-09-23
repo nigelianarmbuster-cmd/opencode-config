@@ -1,7 +1,7 @@
 ﻿---
-description: Debugger subagent — runtime error investigation, root cause analysis, hypothesis testing for the hardest bugs. Powered by DeepSeek V4 Flash.
+description: Debugger subagent — runtime error investigation, root cause analysis, hypothesis testing for the hardest bugs. Powered by DeepSeek V4.1 Flash.
 mode: subagent
-model: deepseek/deepseek-v4-flash
+model: deepseek/deepseek-v4.1-flash
 options:
   reasoningEffort: low
   thinking:

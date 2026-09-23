@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "deepseek/deepseek-v4-pro",
+  "model": "deepseek/deepseek-v4.1-flash",
   "default_agent": "supervisor",
   "subagent_depth": 3,
   "agent": {
@@ -124,7 +124,7 @@
     },
     "deepseek": {
       "models": {
-        "deepseek-v4-flash": {
+        "deepseek-v4.1-flash": {
           "options": {
             "reasoningEffort": "max"
           }
