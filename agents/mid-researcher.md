@@ -1,7 +1,7 @@
 ﻿---
-description: Researcher for topic exploration, source gathering, and structured answers. Powered by Gemini 3.7 Flash.
+description: Researcher for topic exploration, source gathering, and structured answers. Powered by Gemini 3.8 Flash.
 mode: subagent
-model: google/gemini-3.7-flash
+model: google/gemini-3.8-flash
 variant: high
 steps: 40
 color: "#6EE7B7"

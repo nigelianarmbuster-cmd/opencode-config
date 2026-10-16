@@ -1,7 +1,7 @@
 ﻿---
-description: Planner subagent for task breakdown, dependency mapping, sequencing, milestone planning, and risk assessment. Powered by Gemini 3.7 Flash.
+description: Planner subagent for task breakdown, dependency mapping, sequencing, milestone planning, and risk assessment. Powered by Gemini 3.8 Flash.
 mode: subagent
-model: google/gemini-3.7-flash
+model: google/gemini-3.8-flash
 variant: high
 steps: 25
 color: "#A78BFA"
