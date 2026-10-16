@@ -302,7 +302,7 @@ Image-capable agents (`grok-worker`, `gemini-worker`, `grok-mule`, `gemini-mule`
 | `junior-planner` | Task breakdown, sequencing | `planner-mule` | Scope-bounded planning leaf. | Junior-tier only |
 | `junior-editor` | Documentation, prose | `editor-mule` | Document review leaf. | Junior-tier only |
 | `junior-quote-auditor` | Quote verification | `quote-auditor-mule` | Source verification leaf. | Junior-tier only |
-| — | — | `gemini-mule` | Long-context (>128K), reads images/screenshots directly, agentic web research. Gemini 3.8 Flash. | Subagent-internal only |
+| — | — | `gemini-mule` | Long-context (>128K), reads images/screenshots directly, agentic web research. Gemini 3.5 Flash-Lite at budget price. | Subagent-internal only |
 | — | — | `grok-mule` | Creative reasoning, novel algorithms, reads images/screenshots for visual analysis. Grok 4.3 (3x cost — require justification in Subdelegation Log). | Subagent-internal only |
 | — | — | `claude-mule` | Nuanced reasoning, careful analysis, code review. Claude Sonnet 4.6. | Subagent-internal only |
 | `explore` | Codebase exploration | *(built-in)* | File discovery, pattern search. Built-in, not a mule. | Supervisor only |
